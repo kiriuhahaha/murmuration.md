@@ -348,9 +348,12 @@ svg{display:block}
 /* ---------- partners ---------- */
 .pt{padding:0 var(--pad) clamp(90px,11vw,160px)}
 .pt .k{font:600 13px/1 var(--f-text);letter-spacing:.08em;opacity:.55;margin-bottom:24px}
-.chips-sc{overflow-x:auto;scrollbar-width:none;padding-bottom:4px;-webkit-mask:linear-gradient(90deg,#000 calc(100% - 40px),transparent);mask:linear-gradient(90deg,#000 calc(100% - 40px),transparent)}
-.chips-sc::-webkit-scrollbar{display:none}
-.chips{list-style:none;display:flex;flex-wrap:wrap;gap:10px}
+.chips-sc{overflow:hidden;margin:0 calc(var(--pad)*-1);padding:4px 0;-webkit-mask:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
+.chips{list-style:none;display:flex;flex-wrap:nowrap;width:max-content;animation:ribbon var(--dur,60s) linear infinite;will-change:transform}
+.chips li{flex:none;padding-right:10px}
+.chips-sc:hover .chips,.chips-sc:focus-within .chips{animation-play-state:paused}
+@keyframes ribbon{to{transform:translate3d(-50%,0,0)}}
+@media (prefers-reduced-motion:reduce){.chips-sc{overflow-x:auto;margin:0;-webkit-mask:none;mask:none}.chips{animation:none}.chips li[aria-hidden]{display:none}}
 .pt-cta{margin-top:clamp(40px,5vw,72px);background:var(--blue);color:var(--white);border-radius:clamp(20px,2.4vw,36px);padding:clamp(28px,4vw,64px);display:grid;grid-template-columns:repeat(12,1fr);gap:28px 24px;align-items:end}
 .pt-cta .k{opacity:1;margin:0;font:700 clamp(14px,1.1vw,17px)/1 var(--f-head)!important;letter-spacing:.06em!important;text-transform:uppercase;color:var(--lime)}
 .pt-cta .pt-head p{margin-top:16px;font-size:clamp(17px,1.4vw,22px);opacity:.9}
@@ -364,7 +367,6 @@ svg{display:block}
 .pt-cta .sign{grid-column:7/13;font:600 clamp(17px,1.4vw,22px)/1.3 var(--f-text)}
 .pt-cta .sign b{font-family:var(--f-head);letter-spacing:.02em}
 @media (max-width:900px){.pt-cta .pt-head,.pt-cta .ways,.pt-cta .sign{grid-column:1/-1}.pt-cta .way{grid-template-columns:1fr;gap:10px}}
-@media (min-width:1100px){.chips-sc{overflow:visible;-webkit-mask:none;mask:none}.chips{width:auto!important}}
 .chip{display:inline-flex;align-items:center;gap:12px;padding:6px 18px 6px 6px;border-radius:18px!important;white-space:nowrap;border-radius:99px;box-shadow:inset 0 0 0 1px var(--line);transition:background .35s,color .35s,box-shadow .35s}
 .chip small{font:600 10px/1 var(--f-text);letter-spacing:.08em;text-transform:uppercase;opacity:.5;padding-right:12px;border-right:1px solid var(--line)}
 .chip b{font:600 15px/1 var(--f-text)}
@@ -403,6 +405,24 @@ a.chip:hover svg{opacity:1;transform:rotate(45deg)}
 .foot a{border-bottom:1px solid rgba(19,22,44,.35);padding-bottom:6px}
 .foot-l{display:flex;gap:22px;flex-wrap:wrap;align-items:baseline}
 .foot-cap{font-weight:700}
+.foot-legal{flex-basis:100%;display:flex;gap:10px 22px;flex-wrap:wrap;align-items:baseline;font-size:13px;opacity:.75}
+.foot-legal button{all:unset;cursor:pointer;border-bottom:1px solid rgba(19,22,44,.35);padding-bottom:4px}
+.foot-legal button:focus-visible{outline:2px solid var(--blue);outline-offset:4px}
+.legal{margin:auto;width:min(760px,calc(100vw - 32px));max-height:calc(100dvh - 48px);padding:0;border:0;border-radius:20px;background:var(--white);color:var(--navy);overflow:hidden}
+.legal::backdrop{background:rgba(19,22,44,.75);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+.legal,.legal *{cursor:auto!important}.legal a,.legal button{cursor:pointer!important}
+.legal-in{overflow:auto;max-height:calc(100dvh - 48px);padding:clamp(22px,4vw,48px);overscroll-behavior:contain}
+.legal h2{font:700 clamp(15px,3.9vw,26px)/1.2 var(--f-head);text-transform:uppercase;margin:0 48px 6px 0;overflow-wrap:anywhere;word-break:normal;-webkit-hyphens:manual;hyphens:manual}
+.legal h3{font:700 16px/1.3 var(--f-text);margin:22px 0 6px}
+.legal p,.legal li{font:500 15px/1.6 var(--f-text);margin-bottom:8px}
+.legal ul{padding-left:20px}
+.legal a{color:var(--blue);text-decoration:underline;text-underline-offset:2px}
+.legal .upd{opacity:.6;font-size:13px}
+.legal code{font-size:.9em;background:rgba(19,22,44,.08);padding:1px 5px;border-radius:5px}
+.legal-x{all:unset;position:sticky;top:0;float:right;width:40px;height:40px;margin:-8px -8px 0 0;border-radius:50%;display:grid;place-items:center;font-size:18px;background:var(--navy);color:var(--white)}
+.legal-x:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+html[lang="ro"] .legal .l-ru,html:not([lang="ro"]) .legal .l-ro{display:none}
+html:has(dialog[open]){overflow:hidden}
 .foot-l a[data-soc]:not(.fig){opacity:.6;border-color:transparent}
 .foot-l a.fig{font-weight:700;color:var(--blue);border-color:var(--blue)}
 @media (max-width:860px){.fin .lockup{grid-column:1/-1;max-width:140px}.fin .say{grid-column:1/-1}}
@@ -449,7 +469,7 @@ a.chip:hover svg{opacity:1;transform:rotate(45deg)}
 <main>
   <!-- HERO -->
   <section class="hero" id="hero" data-tone="dark">
-    <h1 class="name" aria-label="Murmuration Moldova" data-flock="logo" data-logo-for="0">
+    <h1 class="name" aria-label="Murmuration Moldova">
       <span class="ln"><span class="w" id="nameW"><span class="nw">Murmuration</span> <span class="nw md">Moldova</span></span></span>
     </h1>
     <div class="name-meta"><span data-ro="Comunitate sportivă">Спортивное сообщество</span><span class="soc"><span class="soc-cap" data-ro="Urmărește-ne pe rețelele sociale">Следи за нами в соцсетях</span><a class="ig" data-soc="instagram" href="#" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg><span>Instagram</span></a><a data-soc="tiktok" href="#" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 3c.4 2.2 1.9 3.8 4.1 4v3.1c-1.5 0-2.9-.4-4.1-1.2v6.3A6 6 0 1 1 11.3 9v3.2a2.9 2.9 0 1 0 2.2 2.8V3h3.1z"/></svg><span>TikTok</span></a><a data-soc="facebook" href="#" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.9.3-1.5 1.5-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4v2.2H7.8v3h2.6V21h3.1z"/></svg><span>Facebook</span></a></span></div>
@@ -556,9 +576,9 @@ a.chip:hover svg{opacity:1;transform:rotate(45deg)}
     </div>
     <div class="k" data-ro="Principii">Принципы</div>
     <ol>
-      <li class="rv"><span class="n">01</span><h3><a class="word" data-flock="word" href="https://t.me/murmuration_md" target="_blank" rel="noopener" data-ro="Începe">Начать</a></h3><p data-quiet data-ro="Primul pas nu trebuie să fie perfect.">Первый шаг не должен быть идеальным.</p><span class="go" aria-hidden="true"><svg><use href="#arr"/></svg></span></li>
-      <li class="rv"><span class="n">02</span><h3><a class="word" data-flock="word" href="https://t.me/murmuration_md" target="_blank" rel="noopener" data-ro="Susține">Подхватить</a></h3><p data-quiet data-ro="Susținerea transformă mișcarea în obicei.">Поддержка превращает движение в привычку.</p><span class="go" aria-hidden="true"><svg><use href="#arr"/></svg></span></li>
-      <li class="rv"><span class="n">03</span><h3><a class="word" data-flock="word" href="https://t.me/murmuration_md" target="_blank" rel="noopener" data-ro="Unește">Объединить</a></h3><p data-quiet data-ro="Un mediu puternic face din sport o normă.">Сильная среда делает спорт нормой.</p><span class="go" aria-hidden="true"><svg><use href="#arr"/></svg></span></li>
+      <li class="rv"><span class="n">01</span><h3><a class="word" href="https://t.me/murmuration_md" target="_blank" rel="noopener" data-ro="Începe">Начать</a></h3><p data-quiet data-ro="Primul pas nu trebuie să fie perfect.">Первый шаг не должен быть идеальным.</p><span class="go" aria-hidden="true"><svg><use href="#arr"/></svg></span></li>
+      <li class="rv"><span class="n">02</span><h3><a class="word" href="https://t.me/murmuration_md" target="_blank" rel="noopener" data-ro="Susține">Подхватить</a></h3><p data-quiet data-ro="Susținerea transformă mișcarea în obicei.">Поддержка превращает движение в привычку.</p><span class="go" aria-hidden="true"><svg><use href="#arr"/></svg></span></li>
+      <li class="rv"><span class="n">03</span><h3><a class="word" href="https://t.me/murmuration_md" target="_blank" rel="noopener" data-ro="Unește">Объединить</a></h3><p data-quiet data-ro="Un mediu puternic face din sport o normă.">Сильная среда делает спорт нормой.</p><span class="go" aria-hidden="true"><svg><use href="#arr"/></svg></span></li>
     </ol>
   </section>
 
@@ -603,9 +623,123 @@ a.chip:hover svg{opacity:1;transform:rotate(45deg)}
         <div class="act"><span class="free" data-ro="Intrarea e gratuită">Вход бесплатный</span></div>
       </div>
     </div>
-    <footer class="foot"><span data-ro="Murmuration Moldova · comunitate sportivă">Murmuration Moldova · спортивное сообщество</span><span class="foot-l"><span class="foot-cap" data-ro="Intră pe rețelele noastre:">Переходи в наши соцсети:</span><a class="fig" data-soc="instagram" href="#" target="_blank" rel="noopener">Instagram</a><a data-soc="tiktok" href="#" target="_blank" rel="noopener">TikTok</a><a data-soc="facebook" href="#" target="_blank" rel="noopener">Facebook</a></span></footer>
+    <footer class="foot"><span data-ro="Murmuration Moldova · comunitate sportivă">Murmuration Moldova · спортивное сообщество</span><span class="foot-l"><span class="foot-cap" data-ro="Intră pe rețelele noastre:">Переходи в наши соцсети:</span><a class="fig" data-soc="instagram" href="#" target="_blank" rel="noopener">Instagram</a><a data-soc="tiktok" href="#" target="_blank" rel="noopener">TikTok</a><a data-soc="facebook" href="#" target="_blank" rel="noopener">Facebook</a></span><span class="foot-legal"><span data-ro="© 2026 Murmuration Moldova · comunitate informală, administrator — Chiril Filimon">© 2026 Murmuration Moldova · неформальное сообщество, администратор — Кирилл Филимон</span><button type="button" data-legal="privacy" data-ro="Politica de confidențialitate">Политика конфиденциальности</button><button type="button" data-legal="terms" data-ro="Termeni de utilizare">Условия использования</button></span></footer>
   </section>
 </main>
+
+<dialog class="legal" id="legal-privacy" aria-labelledby="lp-t">
+  <div class="legal-in">
+    <button type="button" class="legal-x" data-close aria-label="Закрыть / Închide">✕</button>
+    <div class="l-ru">
+      <h2 id="lp-t">Политика конфиденци&shy;альности</h2>
+      <p class="upd">Действует с 27 ноября 2026 г.</p>
+      <h3>1. Кто отвечает за сайт и данные</h3>
+      <p>Сайт сообщества Murmuration Moldova ведёт Кирилл Филимон (Chiril Filimon), физическое лицо, Республика Молдова (далее — «мы»). Murmuration Moldova — неформальное спортивное сообщество, а не юридическое лицо. Через сайт ничего не продаётся и не оказываются платные услуги.</p>
+      <p>Связь по любым вопросам о данных: <a href="https://t.me/+37369482459" target="_blank" rel="noopener">Telegram</a> или телефон <a href="tel:+37369482459">+373 69 482 459</a>.</p>
+      <h3>2. Что сайт собирает</h3>
+      <p>Ничего из того, что вы вводите: на сайте нет форм, регистрации, аккаунтов, оплаты, систем аналитики, рекламных трекеров и cookie. Шрифты и видео хранятся на самом сайте, без встроенных сервисов третьих сторон.</p>
+      <h3>3. Хостинг</h3>
+      <p>Сайт размещён на GitHub Pages (GitHub, Inc., США). При открытии страницы GitHub как хостинг-провайдер может технически обрабатывать ваш IP-адрес и данные о браузере в журналах сервера — для доставки страницы и защиты от атак. У нас нет доступа к этим журналам. Подробнее — в <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">заявлении GitHub о конфиденциальности</a>.</p>
+      <h3>4. Память браузера</h3>
+      <p>Если вы переключаете язык, выбор (RU или RO) сохраняется в памяти вашего браузера (localStorage, ключ <code>mm-lang</code>). Это не cookie, нам эти данные не передаются, они нужны только чтобы сайт открывался на выбранном языке. Удалить их можно, очистив данные сайта в настройках браузера.</p>
+      <h3>5. Если вы пишете или звоните нам</h3>
+      <p>Когда вы сами связываетесь с нами (Telegram, звонок, сообщения в соцсетях), мы видим ваше имя или ник, номер телефона и текст сообщения. Используем их только чтобы ответить, рассказать о мероприятии или договориться о партнёрстве. Основание — ваш запрос и наш законный интерес ответить на него. Храним переписку, пока она нужна для общения, не продаём и никому не передаём, кроме случаев, прямо предусмотренных законом.</p>
+      <h3>6. Фото и видео с мероприятий</h3>
+      <p>На открытых мероприятиях ведётся фото- и видеосъёмка, о чём мы предупреждаем в анонсе и на месте. Материалы могут публиковаться на этом сайте и в соцсетях сообщества. Если вы есть на фото или видео и не хотите этого — напишите нам: мы удалим материал или скроем ваше лицо в разумный срок, обычно до 30 дней. Изображения несовершеннолетних публикуем только с согласия родителей или законных представителей.</p>
+      <h3>7. Внешние ссылки</h3>
+      <p>Ссылки ведут в Telegram, Instagram, TikTok, Facebook и на страницы партнёров. Эти сервисы работают по своим правилам и политикам конфиденциальности; мы за них не отвечаем.</p>
+      <h3>8. Ваши права</h3>
+      <p>Вы можете узнать, какие ваши данные у нас есть, исправить или удалить их, возразить против обработки и отозвать согласие. Для этого напишите нам — ответим без неоправданной задержки и в сроки, установленные законом. Вы также вправе подать жалобу в Национальный центр по защите персональных данных Республики Молдова (<a href="https://datepersonale.md" target="_blank" rel="noopener">datepersonale.md</a>) или обратиться в суд.</p>
+      <h3>9. Применимое право</h3>
+      <p>Мы обрабатываем данные в соответствии с законодательством Республики Молдова о защите персональных данных (Закон № 133/2011 и акты, которые его дополняют или заменяют), а в отношении посетителей из Европейского союза — с учётом Регламента (ЕС) 2016/679 (GDPR) в той мере, в какой он применим.</p>
+      <h3>10. Изменения</h3>
+      <p>Если политика изменится, новая версия появится здесь с новой датой.</p>
+    </div>
+    <div class="l-ro" lang="ro">
+      <h2>Politica de confidenția&shy;litate</h2>
+      <p class="upd">În vigoare din 27 noiembrie 2026</p>
+      <h3>1. Cine răspunde de site și de date</h3>
+      <p>Site-ul comunității Murmuration Moldova este administrat de Chiril Filimon, persoană fizică, Republica Moldova (în continuare — „noi”). Murmuration Moldova este o comunitate sportivă informală, nu o persoană juridică. Prin site nu se vinde nimic și nu se prestează servicii contra plată.</p>
+      <p>Pentru orice întrebare despre date: <a href="https://t.me/+37369482459" target="_blank" rel="noopener">Telegram</a> sau telefon <a href="tel:+37369482459">+373 69 482 459</a>.</p>
+      <h3>2. Ce colectează site-ul</h3>
+      <p>Nimic din ce introduceți: pe site nu există formulare, înregistrare, conturi, plăți, sisteme de analiză, trackere publicitare sau cookie-uri. Fonturile și video-ul sunt găzduite pe site, fără servicii terțe încorporate.</p>
+      <h3>3. Găzduirea</h3>
+      <p>Site-ul este găzduit pe GitHub Pages (GitHub, Inc., SUA). La deschiderea paginii, GitHub, ca furnizor de găzduire, poate prelucra tehnic adresa IP și datele despre browser în jurnalele serverului — pentru livrarea paginii și protecția împotriva atacurilor. Noi nu avem acces la aceste jurnale. Detalii — în <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">declarația de confidențialitate GitHub</a>.</p>
+      <h3>4. Memoria browserului</h3>
+      <p>Dacă schimbați limba, alegerea (RU sau RO) se salvează în memoria browserului dvs. (localStorage, cheia <code>mm-lang</code>). Nu este un cookie, nu ne este transmisă și servește doar ca site-ul să se deschidă în limba aleasă. O puteți șterge golind datele site-ului din setările browserului.</p>
+      <h3>5. Dacă ne scrieți sau ne sunați</h3>
+      <p>Când ne contactați (Telegram, apel, mesaje pe rețelele sociale), vedem numele sau pseudonimul, numărul de telefon și textul mesajului. Le folosim doar pentru a vă răspunde, a vă spune despre eveniment sau a discuta un parteneriat. Temeiul — solicitarea dvs. și interesul nostru legitim de a răspunde. Păstrăm corespondența cât este necesară pentru comunicare, nu o vindem și nu o transmitem nimănui, cu excepția cazurilor prevăzute expres de lege.</p>
+      <h3>6. Foto și video de la evenimente</h3>
+      <p>La evenimentele deschise se fac fotografii și filmări, despre care anunțăm în anunț și la fața locului. Materialele pot fi publicate pe acest site și pe rețelele comunității. Dacă apăreți într-o fotografie sau video și nu doriți acest lucru — scrieți-ne: vom șterge materialul sau vă vom ascunde fața într-un termen rezonabil, de regulă până la 30 de zile. Imaginile minorilor le publicăm doar cu acordul părinților sau al reprezentanților legali.</p>
+      <h3>7. Linkuri externe</h3>
+      <p>Linkurile duc spre Telegram, Instagram, TikTok, Facebook și paginile partenerilor. Aceste servicii funcționează după propriile reguli și politici de confidențialitate; nu răspundem pentru ele.</p>
+      <h3>8. Drepturile dvs.</h3>
+      <p>Puteți afla ce date avem despre dvs., le puteți rectifica sau șterge, vă puteți opune prelucrării și vă puteți retrage consimțământul. Scrieți-ne — răspundem fără întârzieri nejustificate și în termenele prevăzute de lege. Aveți, de asemenea, dreptul să depuneți o plângere la Centrul Național pentru Protecția Datelor cu Caracter Personal al Republicii Moldova (<a href="https://datepersonale.md" target="_blank" rel="noopener">datepersonale.md</a>) sau să vă adresați instanței.</p>
+      <h3>9. Legea aplicabilă</h3>
+      <p>Prelucrăm datele în conformitate cu legislația Republicii Moldova privind protecția datelor cu caracter personal (Legea nr. 133/2011 și actele care o completează sau o înlocuiesc), iar pentru vizitatorii din Uniunea Europeană — ținând cont de Regulamentul (UE) 2016/679 (GDPR), în măsura în care se aplică.</p>
+      <h3>10. Modificări</h3>
+      <p>Dacă politica se schimbă, noua versiune va apărea aici cu o dată nouă.</p>
+    </div>
+  </div>
+</dialog>
+
+<dialog class="legal" id="legal-terms" aria-labelledby="lt-t">
+  <div class="legal-in">
+    <button type="button" class="legal-x" data-close aria-label="Закрыть / Închide">✕</button>
+    <div class="l-ru">
+      <h2 id="lt-t">Условия использования</h2>
+      <p class="upd">Действуют с 27 ноября 2026 г.</p>
+      <h3>1. О сайте</h3>
+      <p>Это информационный сайт неформального спортивного сообщества Murmuration Moldova. Сайт ведёт Кирилл Филимон (Chiril Filimon), физическое лицо, Республика Молдова. Сообщество не является юридическим лицом, ничего не продаёт и не оказывает платных услуг; вход на открытые мероприятия бесплатный. Информация на сайте не является публичной офертой. Пользуясь сайтом, вы соглашаетесь с этими условиями.</p>
+      <h3>2. Участие в мероприятиях</h3>
+      <ul>
+        <li>Участие добровольное. Дата, место, формат и правила каждого мероприятия публикуются в анонсе в нашем Telegram-сообществе; при расхождении с сайтом действует анонс.</li>
+        <li>Спорт связан с физической нагрузкой. Оценивайте своё самочувствие и уровень подготовки; при заболеваниях, травмах или беременности перед участием проконсультируйтесь с врачом. Сообщите организатору, если почувствуете себя плохо.</li>
+        <li>Соблюдайте указания организаторов, правила площадки, правила дорожного движения и уважительно относитесь к другим участникам. Организатор может не допустить к участию человека, который создаёт опасность для себя или других.</li>
+        <li>Следите за своими личными вещами — мы не обеспечиваем их хранение.</li>
+        <li>Несовершеннолетние участвуют только с согласия родителей или законных представителей.</li>
+        <li>Мероприятие может быть перенесено или отменено (например, из-за погоды); об этом сообщаем в Telegram.</li>
+        <li>Ничто в этих условиях не ограничивает ответственность, которую по закону нельзя ограничить, в том числе за вред жизни и здоровью, причинённый умышленно или по грубой неосторожности.</li>
+      </ul>
+      <h3>3. Фото и видео</h3>
+      <p>На мероприятиях ведётся съёмка. Как мы используем материалы и как попросить их убрать — в <a href="#privacy" data-legal="privacy">Политике конфиденциальности</a>, раздел 6.</p>
+      <h3>4. Интеллектуальная собственность</h3>
+      <p>Название, логотип, тексты, фото и видео сайта принадлежат Murmuration Moldova и их авторам. Делиться ссылками можно и нужно; копировать материалы или использовать название и логотип в коммерческих целях — только с нашего письменного разрешения. Названия и логотипы партнёров принадлежат их владельцам и показаны с их согласия как упоминание о совместных мероприятиях.</p>
+      <h3>5. Ссылки и информация</h3>
+      <p>Мы стараемся поддерживать информацию актуальной, но она предоставляется «как есть». Сторонние сайты и соцсети, на которые ведут ссылки, работают по своим правилам, и мы за них не отвечаем.</p>
+      <h3>6. Применимое право</h3>
+      <p>Эти условия регулируются законодательством Республики Молдова. Споры мы стараемся решать переговорами; если не получится — в компетентном суде Республики Молдова. Это не лишает вас прав, которые даёт вам закон.</p>
+      <h3>7. Контакты и изменения</h3>
+      <p><a href="https://t.me/+37369482459" target="_blank" rel="noopener">Telegram</a> · <a href="tel:+37369482459">+373 69 482 459</a>. Если условия изменятся, новая версия появится здесь с новой датой.</p>
+    </div>
+    <div class="l-ro" lang="ro">
+      <h2>Termeni de utilizare</h2>
+      <p class="upd">În vigoare din 27 noiembrie 2026</p>
+      <h3>1. Despre site</h3>
+      <p>Acesta este site-ul informativ al comunității sportive informale Murmuration Moldova. Site-ul este administrat de Chiril Filimon, persoană fizică, Republica Moldova. Comunitatea nu este persoană juridică, nu vinde nimic și nu prestează servicii contra plată; intrarea la evenimentele deschise este gratuită. Informația de pe site nu constituie ofertă publică. Folosind site-ul, sunteți de acord cu acești termeni.</p>
+      <h3>2. Participarea la evenimente</h3>
+      <ul>
+        <li>Participarea este benevolă. Data, locul, formatul și regulile fiecărui eveniment sunt publicate în anunțul din comunitatea noastră de Telegram; în caz de neconcordanță cu site-ul, prevalează anunțul.</li>
+        <li>Sportul presupune efort fizic. Evaluați-vă starea și nivelul de pregătire; în caz de boli, traumatisme sau sarcină, consultați un medic înainte de participare. Anunțați organizatorul dacă nu vă simțiți bine.</li>
+        <li>Respectați indicațiile organizatorilor, regulile locației, regulile de circulație și ceilalți participanți. Organizatorul poate să nu admită o persoană care pune în pericol propria siguranță sau pe a altora.</li>
+        <li>Aveți grijă de lucrurile personale — nu asigurăm păstrarea lor.</li>
+        <li>Minorii participă doar cu acordul părinților sau al reprezentanților legali.</li>
+        <li>Evenimentul poate fi amânat sau anulat (de exemplu, din cauza vremii); anunțăm despre aceasta pe Telegram.</li>
+        <li>Nimic din acești termeni nu limitează răspunderea care, potrivit legii, nu poate fi limitată, inclusiv pentru prejudiciul adus vieții și sănătății cauzat intenționat sau din culpă gravă.</li>
+      </ul>
+      <h3>3. Foto și video</h3>
+      <p>La evenimente se filmează. Cum folosim materialele și cum puteți cere eliminarea lor — în <a href="#privacy" data-legal="privacy">Politica de confidențialitate</a>, secțiunea 6.</p>
+      <h3>4. Proprietate intelectuală</h3>
+      <p>Denumirea, logoul, textele, fotografiile și video-urile site-ului aparțin Murmuration Moldova și autorilor lor. Distribuirea linkurilor este binevenită; copierea materialelor sau folosirea denumirii și a logoului în scopuri comerciale — doar cu acordul nostru scris. Denumirile și logourile partenerilor aparțin titularilor lor și sunt afișate cu acordul acestora, ca mențiune a evenimentelor comune.</p>
+      <h3>5. Linkuri și informații</h3>
+      <p>Ne străduim să menținem informația actuală, dar ea este oferită „ca atare”. Site-urile terțe și rețelele sociale spre care duc linkurile funcționează după propriile reguli și nu răspundem pentru ele.</p>
+      <h3>6. Legea aplicabilă</h3>
+      <p>Acești termeni sunt guvernați de legislația Republicii Moldova. Litigiile încercăm să le soluționăm pe cale amiabilă; dacă nu reușim — în instanța competentă din Republica Moldova. Aceasta nu vă lipsește de drepturile pe care vi le oferă legea.</p>
+      <h3>7. Contacte și modificări</h3>
+      <p><a href="https://t.me/+37369482459" target="_blank" rel="noopener">Telegram</a> · <a href="tel:+37369482459">+373 69 482 459</a>. Dacă termenii se schimbă, noua versiune va apărea aici cu o dată nouă.</p>
+    </div>
+  </div>
+</dialog>
 
 <script>
 (() => {
@@ -633,18 +767,27 @@ const PARTNERS = [
   ["XSpace Events",      "https://www.instagram.com/xspace_events/",      "xspace.png",     "XS"]
 ];
 const ul = document.getElementById("partners");
-PARTNERS.forEach(([name,url,logo,ini],i) => {
+/* endless ribbon: the set is repeated so one half is always wider than the screen, then the list slides by exactly half */
+const chip = ([name,url,logo,ini],i,copy) => {
   const li = document.createElement("li");
-  li.innerHTML = `<a class="chip" href="${url}" target="_blank" rel="noopener"><span class="av c${i%4}">${ini}</span><b>${name}</b><svg><use href="#arr"/></svg></a>`;
-  if (logo){ const img = new Image(); img.alt = name; img.onload = () => li.querySelector(".av").appendChild(img); img.src = "logos/" + logo; }
-  ul.appendChild(li);
+  if (copy) li.setAttribute("aria-hidden","true");
+  li.innerHTML = `<a class="chip" href="${url}" target="_blank" rel="noopener"${copy?' tabindex="-1"':''}><span class="av c${i%4}">${ini}</span><b>${name}</b><svg><use href="#arr"/></svg></a>`;
+  if (logo){ const img = new Image(); img.alt = copy ? "" : name; img.onload = () => li.querySelector(".av").appendChild(img); img.src = "logos/" + logo; }
+  return li;
+};
+for (let k=0;k<4;k++) PARTNERS.forEach((p,i) => ul.appendChild(chip(p,i,k>0)));
+function ribbon(){ ul.style.setProperty("--dur", Math.max(20, ul.scrollWidth/2/45).toFixed(1) + "s"); }
+ribbon(); document.fonts && document.fonts.ready.then(ribbon); addEventListener("resize", ribbon);
+/* legal: privacy policy and terms open in place, the page stays one page */
+const openLegal = k => { const d = document.getElementById("legal-" + k); if (d && !d.open){ document.querySelectorAll("dialog.legal[open]").forEach(x => x.close()); d.showModal(); d.querySelector(".legal-in").scrollTop = 0; } };
+document.querySelectorAll("[data-legal]").forEach(b => b.addEventListener("click", e => { e.preventDefault(); openLegal(b.dataset.legal); }));
+document.querySelectorAll("dialog.legal").forEach(d => {
+  d.querySelector("[data-close]").addEventListener("click", () => d.close());
+  d.addEventListener("click", e => { if (e.target === d) d.close(); });
+  d.addEventListener("close", () => { if (/^#(privacy|terms)$/.test(location.hash)) history.replaceState(null, "", location.pathname + location.search); });
 });
-/* small screens: two rows in reading order, scrolled sideways */
-function chipRows(){ if (innerWidth >= 1100){ ul.style.width = ""; return; }
-  ul.style.width = "max-content"; const lis=[...ul.children]; let sum=0; lis.forEach(l => sum += l.offsetWidth + 10);
-  let w = sum/2, acc=0; for (const l of lis){ acc += l.offsetWidth + 10; if (acc >= w){ w = acc; break; } }
-  ul.style.width = Math.ceil(w) + "px"; }
-chipRows(); document.fonts && document.fonts.ready.then(chipRows); addEventListener("resize", chipRows);
+const fromHash = () => { const m = location.hash.match(/^#(privacy|terms)$/); if (m) openLegal(m[1]); };
+addEventListener("hashchange", fromHash); fromHash();
 /* pointers forward to the logo they point at */
 document.querySelectorAll(".hint[data-go]").forEach(h => h.addEventListener("click", () => document.querySelector(h.dataset.go).click()));
 /* RU / RO */
@@ -723,7 +866,8 @@ const COL = {          // engaged palette (brand colours, no gradients)
 };
 const CALM = {dark:"#7E84AE", blue:"#C9D3FF", lime:"#13162c"};
 const ACC = {dark:{lime:"#D9FF0B",orange:"#FC6728"}, blue:{lime:"#D9FF0B",orange:"#FC6728"}, lime:{lime:"#0635FF",orange:"#FC6728"}};
-const pointer = {x:-9999,y:-9999,active:false,last:0,text:false};
+const pointer = {x:-9999,y:-9999,active:false,last:0,text:false,in:false};
+const NEAR = 70;   // px around a logo where the flock starts to gather into it
 let target = null, scrollV = 0, lastY = scrollY, time = 0, frame = 0;
 const shocks = [];
 let tones = [], quiet = [];
@@ -817,6 +961,7 @@ function step(dt){
   if (target && target.until && performance.now() > target.until) target = null;
   if (pointer.active && performance.now() - pointer.last > 2600) pointer.active = false;
   if (pointer.active && frame%5===0) pointer.text = overText(pointer.x,pointer.y);
+  if (frame%6===0) checkHover();
   let tr = null, T = target && target.kind!=="logo" ? target : (!target && ambient ? {el:ambient, kind:"cta", accent:"orange"} : null);
   if (T){ const r = T.el.getBoundingClientRect(); if (r.bottom>-50 && r.top<H+50) tr = r; else T = null; }
   curAcc = T ? (T.accent || T.el.dataset.accent || "lime") : null;
@@ -934,17 +1079,29 @@ mqReduce.addEventListener && mqReduce.addEventListener("change", e => { REDUCED=
 const overText = (x,y) => { for (const q of quiet) if (x>q.l+10&&x<q.r-10&&y>q.t+10&&y<q.b-10) return true; return false; };
 addEventListener("pointermove", e => {
   if (e.pointerType!=="mouse" && e.pointerType!=="pen") return;
-  pointer.x=e.clientX; pointer.y=e.clientY; pointer.active=true; pointer.last=performance.now(); pointer.text = overText(e.clientX,e.clientY);
+  pointer.x=e.clientX; pointer.y=e.clientY; pointer.active=true; pointer.in=true; pointer.last=performance.now(); pointer.text = overText(e.clientX,e.clientY);
+  checkHover();
 }, {passive:true});
 addEventListener("pointerdown", e => { if (e.pointerType==="mouse") impulse(e.clientX,e.clientY); }, {passive:true});
-document.addEventListener("pointerleave", () => pointer.active=false);
+document.addEventListener("pointerleave", () => { pointer.active=false; pointer.in=false; checkHover(); });
+document.documentElement.addEventListener("mouseleave", () => { pointer.active=false; pointer.in=false; checkHover(); });
 function impulse(x,y){
   if (REDUCED || logoOn>=0) return;
   const t=toneAt(x,y);
   shocks.push({x,y,r:4,max:200,a:.85,c: t==="lime" ? "#13162c" : "#D9FF0B"});
   for (const b of birds){ const dx=b.x-x, dy=b.y-y, d=Math.hypot(dx,dy); if (d<300&&d>.1){ const f=(1-d/300)*3.2; b.vx+=dx/d*f; b.vy+=dy/d*f; } }
 }
-addEventListener("scroll", () => { const y=scrollY, d=y-lastY; lastY=y; scrollV=scrollV*.6+d*.4; }, {passive:true});
+addEventListener("scroll", () => { const y=scrollY, d=y-lastY; lastY=y; scrollV=scrollV*.6+d*.4; checkHover(); }, {passive:true});
+/* the flock only stays while the cursor does: leaving the element (or scrolling it away) lets the birds go */
+const inRect = (r,m) => pointer.x>r.left-m && pointer.x<r.right+m && pointer.y>r.top-m && pointer.y<r.bottom+m;
+function checkHover(){
+  if (!FINE) return;
+  if (target && !target.focus){
+    const isLogo = target.kind==="logo", r = (isLogo ? LOGOS[target.logo].svg : target.el).getBoundingClientRect();
+    if (!pointer.in || !inRect(r, isLogo ? NEAR : 4)) clearTarget(target.el);
+  }
+  if (!target && pointer.in) for (const L of LOGOS){ if (inRect(L.svg.getBoundingClientRect(), NEAR)){ setTarget(L.box); break; } }
+}
 
 function setTarget(el, kind){
   target={el, kind: kind || el.dataset.flock, until:0};
@@ -953,9 +1110,12 @@ function setTarget(el, kind){
 function clearTarget(el){ if (target && target.el===el){ if (target.kind==="logo") LOGOS[target.logo].box.classList.remove("dim"); target=null; } }
 window.setTarget = setTarget; window.clearTarget = clearTarget;
 document.querySelectorAll("[data-flock]").forEach(el => {
-  el.addEventListener("pointerenter", e => { if (e.pointerType==="mouse" || e.pointerType==="pen") setTarget(el); });
-  el.addEventListener("pointerleave", () => clearTarget(el));
-  el.addEventListener("focus", () => { if (FINE) setTarget(el); });
+  if (el.dataset.flock!=="logo"){   // logos are picked up by proximity in checkHover()
+    el.addEventListener("pointerenter", e => { if (e.pointerType==="mouse" || e.pointerType==="pen") setTarget(el); });
+    el.addEventListener("pointerleave", () => clearTarget(el));
+  }
+  /* keyboard focus only (not the focus a mouse click leaves behind, which used to keep the birds stuck) */
+  el.addEventListener("focus", () => { if (FINE && el.matches(":focus-visible")){ setTarget(el); target.focus = true; } });
   el.addEventListener("blur", () => clearTarget(el));
 });
 /* touch screens: no hover-driven flock; it only builds the logos and frames the finale handle */
@@ -987,22 +1147,8 @@ resize();
 if (REDUCED){ drawStatic(); }
 else {
   start();
-  /* the flock flies in, gathers into a logo, the logo appears, the flock lets go */
-  const assemble = (k, then) => {
-    const L = LOGOS[k]; if (L.formed) { then && then(); return; } L.formed = true;
-    formLogo(k, true);
-    setTimeout(() => L.box.classList.add("on"), 2500);
-    setTimeout(() => { if (logoOn===k) formLogo(k, false); then && then(); }, 3500);
-  };
-  const hr = markSvg.getBoundingClientRect();
-  if (hr.top < innerHeight*.85) setTimeout(() => assemble(0), 350);
-  else { const o = new IntersectionObserver(es => { if (es[0].isIntersecting){ o.disconnect(); assemble(0); } }, {threshold:.6}); o.observe(markSvg); }
-  /* finale: the lockup assembles, then the flock frames the community handle in orange while the block is on screen */
-  const finEl = document.getElementById("join"), handle = document.getElementById("finHandle");
-  let finIn = false;
-  const finMark = LOGOS[1].svg;
-  new IntersectionObserver(es => { finIn = es[0].isIntersecting; if (!finIn) ambient = null; else if (LOGOS[1].formed && logoOn!==1) ambient = handle; }, {threshold:.2}).observe(finEl);
-  new IntersectionObserver(es => { if (es[0].isIntersecting) assemble(1, () => { if (finIn) ambient = handle; }); }, {threshold:.7}).observe(finMark);
+  /* logos are visible from the start; the flock gathers into one only when the cursor comes close */
+  LOGOS.forEach(L => { L.formed = true; L.box.classList.add("on"); });
 }
 })();
 </script>
